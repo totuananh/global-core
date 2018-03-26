@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Library\Gobiz\Elastic;
+namespace Gobiz\Elastic;
 
 use Elasticsearch\ClientBuilder;
 

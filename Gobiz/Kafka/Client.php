@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Library\Gobiz\Kafka;
+namespace Gobiz\Kafka;
 
 use Illuminate\Support\Facades\Config;
 use Kafka\Consumer;

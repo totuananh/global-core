@@ -1,3 +1,3 @@
 <?php
 
-namespace App\Library\Gobiz\Clickhouse;
+namespace Gobiz\Clickhouse;
