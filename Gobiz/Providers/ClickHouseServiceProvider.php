@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Gobiz\Clickhouse\Client;
+use Clickhouse\Client;
 use Illuminate\Support\ServiceProvider;
 
 class ClickHouseServiceProvider extends ServiceProvider
@@ -16,10 +16,11 @@ class ClickHouseServiceProvider extends ServiceProvider
     {
 
         $this->mergeConfigFrom(__DIR__ . '/../../config/clickhouse.php', 'clickhouse');
+        $config = config('clickhouse');
 
-        $this->app->singleton('clickhouse', function ($app) {
+        $this->app->singleton('clickhouse', function ($app) use($config) {
 
-            return (new Client(config('clickhouse')));
+            return (new Client($config['host'], $config['port'], $config['username'], $config['password']));
         });
     }
 
