@@ -6,32 +6,36 @@ class Example
 {
     public static function example()
     {
-        // Tạo activity
-        $activity = new Activity([
+        ActivityService::log(new Activity([
+            // Thông tin người thực hiện
             'creator' => [
                 'id' => 111,
                 'username' => 'admin',
                 'name' => 'Full name',
                 'partner_id' => 222,
             ],
+
+            // Mã action (format OBJECT.ACTION)
             'action' => 'USER.CREATE',
+
+            // ID các đối tượng bị ảnh hưởng bới action (dùng để search ra các log activity của 1 đối tượng)
             'objects' => [
                 'user' => 333,
             ],
+
+            // Mô tả
             'description' => 'Admin "admin" tạo thành viên mới "user1"',
-            'time' => new \DateTime(), // Nếu không khai báo thì mặc định là now
+
+            // Thời gian thực hiện (optional, default: now)
+            'time' => new \DateTime(),
+
+            // Dữ liệu bổ sung (optional)
             'payload' => [
                 'new_user' => [
                     'id' => 333,
                     'username' => 'user1',
                 ],
             ],
-        ]);
-
-        // Push activity vào kafka
-        ActivityService::dispatch($activity);
-
-        // Lưu trực tiếp vào elastic search
-        ActivityService::log($activity);
+        ]));
     }
 }

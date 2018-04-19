@@ -2,7 +2,6 @@
 
 namespace Gobiz\Activity;
 
-use DateTime;
 use Gobiz\Support\OptionsAccess;
 use InvalidArgumentException;
 
@@ -32,8 +31,8 @@ class Activity extends OptionsAccess implements ActivityInterface
                 static::PARAM_ALLOWED_TYPES => 'string',
             ],
             'time' => [
-                static::PARAM_NORMALIZER => 'datetime',
-                static::PARAM_DEFAULT => new DateTime(),
+                static::PARAM_NORMALIZER => 'int',
+                static::PARAM_DEFAULT => time(),
             ],
             'payload' => [
                 static::PARAM_ALLOWED_TYPES => 'array',
@@ -103,7 +102,7 @@ class Activity extends OptionsAccess implements ActivityInterface
     /**
      * Get the activity time
      *
-     * @return DateTime
+     * @return int
      */
     public function getTime()
     {
@@ -139,7 +138,7 @@ class Activity extends OptionsAccess implements ActivityInterface
             'action' => $this->getAction(),
             'objects' => $this->getObjects(),
             'description' => $this->getDescription(),
-            'time' => $this->getTime()->format('Y-m-d h:i:s'),
+            'time' => $this->getTime(),
             'payload' => $this->getPayload(),
         ];
     }

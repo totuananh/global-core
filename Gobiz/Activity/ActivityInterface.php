@@ -37,7 +37,7 @@ interface ActivityInterface
     /**
      * Lấy thời gian thực hiện
      *
-     * @return DateTime
+     * @return int
      */
     public function getTime();
 

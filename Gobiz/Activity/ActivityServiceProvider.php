@@ -16,15 +16,6 @@ class ActivityServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/config/activity_log.php', 'activity_log');
 
-        $this->app->singleton(ActivityDispatcherInterface::class, function () {
-           return new KafkaDispatcher(
-               app('kafka.pub'),
-               app('kafka.sub'),
-               config('activity_log.kafka_topic'),
-               LogService::logger('activity-log')
-           );
-        });
-
         $this->app->singleton(ActivityLoggerInterface::class, function () {
            return new ElasticSearchLogger(
                ElasticSearchService::client(),
@@ -37,7 +28,6 @@ class ActivityServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            ActivityDispatcherInterface::class,
             ActivityLoggerInterface::class,
         ];
     }
