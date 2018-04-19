@@ -45,7 +45,7 @@ class ElasticSearchLogger implements ActivityLoggerInterface
     public function log(ActivityInterface $activity)
     {
         $this->elastic->index([
-            'index' => $this->index,
+            'index' => $this->index . '_' . date('Y_m_d'),
             'type' => $this->type,
             'body' => array_merge($activity->getActivityAsArray(), [
                 'partner_id' => $activity->getCreator()->getPartnerId(),
