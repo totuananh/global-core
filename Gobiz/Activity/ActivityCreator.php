@@ -18,10 +18,10 @@ class ActivityCreator extends OptionsAccess implements ActivityCreatorInterface
                 static::PARAM_ALLOWED_TYPES => ['int', 'string'],
             ],
             'username' => [
-                static::PARAM_ALLOWED_TYPES => 'string',
+                static::PARAM_NORMALIZER => 'string',
             ],
             'name' => [
-                static::PARAM_ALLOWED_TYPES => 'string',
+                static::PARAM_NORMALIZER => 'string',
             ],
             'partner_id' => [
                 static::PARAM_ALLOWED_TYPES => ['int', 'string'],
