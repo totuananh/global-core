@@ -15,6 +15,9 @@ class Activity extends OptionsAccess implements ActivityInterface
     protected function makeConfig()
     {
         return [
+            'id' => [
+                static::PARAM_NORMALIZER => 'string',
+            ],
             'creator' => [
                 static::PARAM_NORMALIZER => function ($input) {
                     return $this->normalizeCreator($input);
@@ -26,9 +29,6 @@ class Activity extends OptionsAccess implements ActivityInterface
             'objects' => [
                 static::PARAM_ALLOWED_TYPES => 'array',
                 static::PARAM_DEFAULT => [],
-            ],
-            'description' => [
-                static::PARAM_ALLOWED_TYPES => 'string',
             ],
             'time' => [
                 static::PARAM_NORMALIZER => 'int',
@@ -57,6 +57,16 @@ class Activity extends OptionsAccess implements ActivityInterface
         }
 
         throw new InvalidArgumentException('The creator must is instance of ActivityCreatorInterface or is an array');
+    }
+
+    /**
+     * Lấy log id
+     *
+     * @return string|null
+     */
+    public function getId()
+    {
+        return $this->get('id');
     }
 
     /**

@@ -16,8 +16,8 @@ class ActivityServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/config/activity_log.php', 'activity_log');
 
-        $this->app->singleton(ActivityLoggerInterface::class, function () {
-           return new ElasticSearchLogger(
+        $this->app->singleton(ActivityLogRepositoryInterface::class, function () {
+           return new ActivityLogRepository(
                ElasticSearchService::client(),
                config('activity_log.elastic_index'),
                config('activity_log.elastic_type')
@@ -28,7 +28,7 @@ class ActivityServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            ActivityLoggerInterface::class,
+            ActivityLogRepositoryInterface::class,
         ];
     }
 }

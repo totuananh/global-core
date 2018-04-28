@@ -2,10 +2,15 @@
 
 namespace Gobiz\Activity;
 
-use DateTime;
-
 interface ActivityInterface
 {
+    /**
+     * Lấy log id
+     *
+     * @return string|null
+     */
+    public function getId();
+
     /**
      * Lấy thông tin người thực hiện
      *
@@ -26,13 +31,6 @@ interface ActivityInterface
      * @return array
      */
     public function getObjects();
-
-    /**
-     * Lấy mô tả cho hành động
-     *
-     * @return string
-     */
-    public function getDescription();
 
     /**
      * Lấy thời gian thực hiện
