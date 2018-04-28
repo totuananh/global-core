@@ -15,7 +15,7 @@ class ActivityCreator extends OptionsAccess implements ActivityCreatorInterface
     {
         return [
             'id' => [
-                static::PARAM_ALLOWED_TYPES => ['int', 'string'],
+                static::PARAM_NORMALIZER => 'int',
             ],
             'username' => [
                 static::PARAM_NORMALIZER => 'string',
@@ -24,7 +24,6 @@ class ActivityCreator extends OptionsAccess implements ActivityCreatorInterface
                 static::PARAM_NORMALIZER => 'string',
             ],
             'partner_id' => [
-                static::PARAM_ALLOWED_TYPES => ['int', 'string'],
                 static::PARAM_NORMALIZER => 'int',
             ],
         ];
@@ -33,7 +32,7 @@ class ActivityCreator extends OptionsAccess implements ActivityCreatorInterface
     /**
      * Get the creator id
      *
-     * @return int|string
+     * @return int
      */
     public function getId()
     {

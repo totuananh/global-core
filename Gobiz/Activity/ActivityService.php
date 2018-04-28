@@ -5,20 +5,20 @@ namespace Gobiz\Activity;
 class ActivityService
 {
     /**
-     * @return ActivityLoggerInterface
+     * @return ActivityLogRepositoryInterface
      */
-    public static function logger()
+    public static function repository()
     {
-        return app(ActivityLoggerInterface::class);
+        return app(ActivityLogRepositoryInterface::class);
     }
 
     /**
-     * Lưu activity vào elastic search
+     * Lưu log activity
      *
      * @param ActivityInterface $activity
      */
     public static function log(ActivityInterface $activity)
     {
-        static::logger()->log($activity);
+        static::repository()->log($activity);
     }
 }

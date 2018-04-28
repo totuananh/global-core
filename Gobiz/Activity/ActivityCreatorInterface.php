@@ -7,7 +7,7 @@ interface ActivityCreatorInterface
     /**
      * Get the creator id
      *
-     * @return int|string
+     * @return int
      */
     public function getId();
 
