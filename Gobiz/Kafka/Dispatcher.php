@@ -48,9 +48,13 @@ class Dispatcher implements DispatcherInterface
      */
     public function publish($topic, $payload, $key = null)
     {
+        $conf = new TopicConf();
+        $conf->set('message.timeout.ms', 1000);
+
         $this->makeProducer()
-            ->newTopic($topic)
+            ->newTopic($topic, $conf)
             ->produce(RD_KAFKA_PARTITION_UA, 0, $payload, $key);
+
     }
 
     /**
