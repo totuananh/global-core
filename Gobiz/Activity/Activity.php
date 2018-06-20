@@ -7,6 +7,15 @@ use InvalidArgumentException;
 
 class Activity extends OptionsAccess implements ActivityInterface
 {
+    const ID        = 'id';
+    const CREATOR   = 'creator';
+    const ACTION    = 'action';
+    const OBJECTS   = 'objects';
+    const IS_PUBLIC = 'is_public';
+    const PAYLOAD   = 'payload';
+    const TIME      = 'time';
+    const MESSAGE   = 'message';
+
     /**
      * Make the options config
      *
@@ -15,26 +24,34 @@ class Activity extends OptionsAccess implements ActivityInterface
     protected function makeConfig()
     {
         return [
-            'id' => [
+            static::ID => [
                 static::PARAM_NORMALIZER => 'string',
             ],
-            'creator' => [
+            static::CREATOR => [
                 static::PARAM_NORMALIZER => function ($input) {
                     return $this->normalizeCreator($input);
                 },
+                static::PARAM_DEFAULT => [],
             ],
-            'action' => [
+            static::ACTION => [
                 static::PARAM_ALLOWED_TYPES => 'string',
             ],
-            'objects' => [
+            static::IS_PUBLIC => [
+                static::PARAM_NORMALIZER => 'int'
+            ],
+            static::MESSAGE => [
+                static::PARAM_ALLOWED_TYPES => 'string',
+                static::PARAM_DEFAULT => '',
+            ],
+            static::OBJECTS => [
                 static::PARAM_ALLOWED_TYPES => 'array',
                 static::PARAM_DEFAULT => [],
             ],
-            'time' => [
+            static::TIME => [
                 static::PARAM_NORMALIZER => 'int',
                 static::PARAM_DEFAULT => time(),
             ],
-            'payload' => [
+            static::PAYLOAD => [
                 static::PARAM_ALLOWED_TYPES => 'array',
                 static::PARAM_DEFAULT => [],
             ],
@@ -66,7 +83,7 @@ class Activity extends OptionsAccess implements ActivityInterface
      */
     public function getId()
     {
-        return $this->get('id');
+        return $this->get(static::ID);
     }
 
     /**
@@ -76,7 +93,7 @@ class Activity extends OptionsAccess implements ActivityInterface
      */
     public function getCreator()
     {
-        return $this->get('creator');
+        return $this->get(static::CREATOR);
     }
 
     /**
@@ -86,7 +103,27 @@ class Activity extends OptionsAccess implements ActivityInterface
      */
     public function getAction()
     {
-        return $this->get('action');
+        return $this->get(static::ACTION);
+    }
+
+    /**
+     * get is public log
+     *
+     * @return boolean
+     */
+    public function getIsPublic()
+    {
+        return $this->get(static::IS_PUBLIC);
+    }
+
+    /**
+     * get is message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+       return $this->get(static::MESSAGE);
     }
 
     /**
@@ -96,17 +133,7 @@ class Activity extends OptionsAccess implements ActivityInterface
      */
     public function getObjects()
     {
-        return $this->get('objects');
-    }
-
-    /**
-     * Get the description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->get('description');
+        return $this->get(static::OBJECTS);
     }
 
     /**
@@ -116,7 +143,7 @@ class Activity extends OptionsAccess implements ActivityInterface
      */
     public function getTime()
     {
-        return $this->get('time');
+        return $this->get(static::TIME);
     }
 
     /**
@@ -126,7 +153,7 @@ class Activity extends OptionsAccess implements ActivityInterface
      */
     public function getPayload()
     {
-        return $this->get('payload');
+        return $this->get(static::PAYLOAD);
     }
 
     /**
@@ -139,17 +166,20 @@ class Activity extends OptionsAccess implements ActivityInterface
         $creator = $this->getCreator();
 
         return [
-            'creator' => [
-                'id' => $creator->getId(),
-                'username' => $creator->getUsername(),
-                'name' => $creator->getName(),
-                'partner_id' => $creator->getPartnerId(),
+            static::CREATOR => [
+                ActivityCreator::TYPE => $creator->getType(),
+                ActivityCreator::ID => $creator->getId(),
+                ActivityCreator::USERNAME => $creator->getUsername(),
+                ActivityCreator::NAME => $creator->getName(),
+                ActivityCreator::PARTNER_ID => $creator->getPartnerId(),
+                ActivityCreator::IS_ADMIN => $creator->getIsAdmin()
             ],
-            'action' => $this->getAction(),
-            'objects' => $this->getObjects(),
-            'description' => $this->getDescription(),
-            'time' => $this->getTime(),
-            'payload' => $this->getPayload(),
+            static::ACTION => $this->getAction(),
+            static::IS_PUBLIC => $this->getIsPublic(),
+            static::MESSAGE => $this->getMessage(),
+            static::OBJECTS => $this->getObjects(),
+            static::TIME => $this->getTime(),
+            static::PAYLOAD => $this->getPayload(),
         ];
     }
 }

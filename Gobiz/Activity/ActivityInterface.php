@@ -26,6 +26,20 @@ interface ActivityInterface
     public function getAction();
 
     /**
+     * Log co public cho khach hang xem ko
+     *
+     * @return boolean
+     */
+    public function getIsPublic();
+
+    /**
+     * get is message
+     *
+     * @return string
+     */
+    public function getMessage();
+
+    /**
      * Lấy danh sách các đối tượng bị ảnh hưởng bởi hành động
      *
      * @return array

@@ -6,27 +6,52 @@ use Gobiz\Support\OptionsAccess;
 
 class ActivityCreator extends OptionsAccess implements ActivityCreatorInterface
 {
+    const TYPE       = 'type';
+    const ID         = 'id';
+    const USERNAME   = 'username';
+    const NAME       = 'name';
+    const PARTNER_ID = 'partner_id';
+    const IS_ADMIN   = 'is_admin';
+
     /**
      * Make the options config
-     *
+     * type: (system, action, comment)
+     * is_admin: (true, false)
      * @return array
      */
     protected function makeConfig()
     {
         return [
-            'id' => [
+            static::TYPE => [
+                static::PARAM_ALLOWED_TYPES => static::STRING,
+                static::PARAM_DEFAULT => ''
+            ],
+            static::ID => [
                 static::PARAM_NORMALIZER => 'int',
             ],
-            'username' => [
-                static::PARAM_NORMALIZER => 'string',
+            static::USERNAME => [
+                static::PARAM_NORMALIZER => static::STRING,
             ],
-            'name' => [
-                static::PARAM_NORMALIZER => 'string',
+            static::NAME => [
+                static::PARAM_NORMALIZER => static::STRING,
             ],
-            'partner_id' => [
+            static::PARTNER_ID => [
                 static::PARAM_NORMALIZER => 'int',
             ],
+            static::IS_ADMIN => [
+                static::PARAM_NORMALIZER => 'int'
+            ]
         ];
+    }
+
+    /**
+     * Get the creator type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->get(static::TYPE);
     }
 
     /**
@@ -36,7 +61,7 @@ class ActivityCreator extends OptionsAccess implements ActivityCreatorInterface
      */
     public function getId()
     {
-        return $this->get('id');
+        return $this->get(static::ID);
     }
 
     /**
@@ -46,7 +71,7 @@ class ActivityCreator extends OptionsAccess implements ActivityCreatorInterface
      */
     public function getUsername()
     {
-        return $this->get('username');
+        return $this->get(static::USERNAME);
     }
 
     /**
@@ -56,7 +81,7 @@ class ActivityCreator extends OptionsAccess implements ActivityCreatorInterface
      */
     public function getName()
     {
-        return $this->get('name');
+        return $this->get(static::NAME);
     }
 
     /**
@@ -66,6 +91,16 @@ class ActivityCreator extends OptionsAccess implements ActivityCreatorInterface
      */
     public function getPartnerId()
     {
-        return $this->get('partner_id');
+        return $this->get(static::PARTNER_ID);
+    }
+
+    /**
+     * Get the creator is_admin
+     *
+     * @return int
+     */
+    public function getIsAdmin()
+    {
+        return $this->get(static::IS_ADMIN);
     }
 }

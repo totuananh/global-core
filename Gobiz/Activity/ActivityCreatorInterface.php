@@ -5,6 +5,13 @@ namespace Gobiz\Activity;
 interface ActivityCreatorInterface
 {
     /**
+     * Get the creator type
+     *
+     * @return string
+     */
+    public function getType();
+
+    /**
      * Get the creator id
      *
      * @return int
@@ -31,4 +38,11 @@ interface ActivityCreatorInterface
      * @return int
      */
     public function getPartnerId();
+
+    /**
+     * Get the creator is_admin
+     *
+     * @return int
+     */
+    public function getIsAdmin();
 }
