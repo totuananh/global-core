@@ -19,6 +19,6 @@ class ActivityService
      */
     public static function log(ActivityInterface $activity)
     {
-        static::repository()->log($activity);
+        return static::repository()->log($activity);
     }
 }

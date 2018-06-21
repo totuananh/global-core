@@ -19,6 +19,8 @@ abstract class OptionsAccess implements Arrayable
     const PARAM_INSTANCEOF = 'instanceof';
     const PARAM_NORMALIZER = 'normalizer';
 
+    const STRING = 'string';
+
     /**
      * Options config
      *
